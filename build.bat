@@ -16,10 +16,10 @@ if "%nuget%" == "" (
 
 %nuget% restore
 
-%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild RedactSharp.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false
+%MsBuildExe% RedactSharp.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false
 
-mkdir Build
-mkdir Build\lib
-mkdir Build\lib\net452
+rem mkdir Build
+rem mkdir Build\lib
+rem mkdir Build\lib\net452
 
-%nuget% pack ".nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="%config%"
+rem %nuget% pack ".nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="%config%"
