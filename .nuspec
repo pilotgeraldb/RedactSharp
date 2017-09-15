@@ -1,0 +1,20 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>RedactSharp</id>
+    <version>$version$</version>
+    <title>RedactSharp</title>
+    <authors>Gerald Burkholder</authors>
+    <owners>Gerald Burkholder</owners>
+    <licenseUrl>https://github.com/ralphy15/RedactSharp/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/ralphy15/RedactSharp/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>a library for redacting text</description>
+    <releaseNotes></releaseNotes>
+    <copyright></copyright>
+    <tags></tags>
+  </metadata>
+  <files>
+    <file src="RedactSharp\bin\$configuration$\RedactSharp.dll" target="lib\net452\" />
+  </files>
+</package>
