@@ -73,7 +73,6 @@
     <Compile Include="Redactors\MatchProcessor.cs" />
     <Compile Include="Redactors\MatchProcessorFactory.cs" />
     <Compile Include="Redactors\RedactorCollection.cs" />
-    <Compile Include="Redactors\RedactorLog.cs" />
     <Compile Include="Redactors\RedactorLogItem.cs" />
     <Compile Include="Redactors\RedactorMatch.cs" />
     <Compile Include="Redactors\RedactorOptions.cs" />
