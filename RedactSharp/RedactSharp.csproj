@@ -81,8 +81,10 @@
     <Compile Include="Redactors\RedactorOptions.cs" />
     <Compile Include="Redactors\RedactorResult.cs" />
     <Compile Include="Redactors\RegularExpressionMatcher.cs" />
+    <Compile Include="Redactors\SocialSecurity\SocialSecurityNumberValidator.cs" />
     <Compile Include="Redactors\SocialSecurity\SocialSecurityRedactor.cs" />
     <Compile Include="Redactors\SocialSecurity\SocialSecuritySanitizer.cs" />
+    <Compile Include="Redactors\Telephone\TelephoneSanitizer.cs" />
     <Compile Include="Redactors\Telephone\TelephoneRedactor.cs" />
     <Compile Include="Sanitizers\ISanitizer.cs" />
     <Compile Include="Sanitizers\ISanitizerOptions.cs" />
