@@ -46,6 +46,7 @@
     <Compile Include="CharacterExtensions.cs" />
     <Compile Include="CharacterSnapshot.cs" />
     <Compile Include="IRedactConfigurable.cs" />
+    <Compile Include="Redactors\IRedactorCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Redactors\AbstractRedactor.cs" />
     <Compile Include="Redactors\CreditCard\AmericanExpressRedactor.cs" />

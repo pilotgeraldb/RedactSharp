@@ -14,7 +14,7 @@ namespace RedactSharpTests
     public class AbstractRedactorTests
     {
         [Fact]
-        public void ShouldRedactText()
+        public void ShouldRedactTextWithStandardRedactors()
         {
             StringBuilder input = new StringBuilder();
             
@@ -62,13 +62,41 @@ namespace RedactSharpTests
 
             RedactorCollection c = new RedactorCollection();
 
-            c.Redactors.AddRange(CreditCardRedactors.All());
-            c.Redactors.Add(new SocialSecurityRedactor());
-            c.Redactors.Add(new TelephoneRedactor());
+            c.AddRange(CreditCardRedactors.All());
+            c.Add(new SocialSecurityRedactor());
+            c.Add(new TelephoneRedactor());
 
             string ouput = c.Redact(input.ToString());
 
             Assert.Equal(expectedOutput.ToString(), ouput);
+        }
+
+        [Fact]
+        public void ShouldRedactTextWithCustomRedactors()
+        {
+            StringBuilder input = new StringBuilder();
+            input.Append(@"this is a custom redactor test");
+            
+
+            StringBuilder expectedOutput = new StringBuilder();
+            expectedOutput.Append(@"this is a custom redactor test");
+            
+            RedactorCollection c = new RedactorCollection();
+            c.Add(new CustomRedactor());
+
+            string ouput = c.Redact(input.ToString());
+
+            Assert.Equal(expectedOutput.ToString(), ouput);
+        }
+    }
+
+    public class CustomRedactor : IRedactor
+    {
+        public string FriendlyName { get; set; }
+
+        public IRedactorResult Redact(string input)
+        {
+            return new RedactorResult() { Result = input };
         }
     }
 }
