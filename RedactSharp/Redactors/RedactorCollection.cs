@@ -18,6 +18,11 @@ namespace RedactSharp.Redactors
 
         public string Redact(string stringToRedact)
         {
+            if (stringToRedact == null)
+            {
+                return null;
+            }
+
             StringBuilder input = new StringBuilder(stringToRedact);
 
             List<IRedactorResult> redactorResults = new List<IRedactorResult>();

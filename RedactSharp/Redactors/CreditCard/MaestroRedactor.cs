@@ -8,11 +8,11 @@ namespace RedactSharp.Redactors.CreditCard
 
         public MaestroRedactor()
         {
-            UseValidator<LuhnValidator>();
-            UseMatchProcessor<CreditCardMatchProcessor>();
-            UseSanitizer<CreditCardSanitizer>();
-            UseExpressionMatcher<RegularExpressionMatcher>(@"(5[06-8]|6\d)\d{10,17}");
-            UseFriendlyName("Maestro");
+            this.UseValidator<LuhnValidator>();
+            this.UseMatchProcessor<CreditCardMatchProcessor>();
+            this.UseSanitizer<CreditCardSanitizer>();
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"(5[06-8]|6\d)\d{10,17}");
+            this.UseFriendlyName("Maestro");
         }
 
         public AbstractRedactor Configure(IRedactorOptions options)

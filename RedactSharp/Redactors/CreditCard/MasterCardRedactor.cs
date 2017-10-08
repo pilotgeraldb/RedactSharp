@@ -8,11 +8,11 @@ namespace RedactSharp.Redactors.CreditCard
 
         public MasterCardRedactor()
         {
-            UseValidator<LuhnValidator>();
-            UseMatchProcessor<CreditCardMatchProcessor>();
-            UseSanitizer<CreditCardSanitizer>();
-            UseExpressionMatcher<RegularExpressionMatcher>(@"((5[1-5]\d{4}|677189)\d{10})");
-            UseFriendlyName("MasterCard");
+            this.UseValidator<LuhnValidator>();
+            this.UseMatchProcessor<CreditCardMatchProcessor>();
+            this.UseSanitizer<CreditCardSanitizer>();
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"((5[1-5]\d{4}|677189)\d{10})");
+            this.UseFriendlyName("MasterCard");
         }
 
         public AbstractRedactor Configure(IRedactorOptions options)

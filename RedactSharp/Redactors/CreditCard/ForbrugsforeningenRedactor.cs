@@ -8,11 +8,11 @@ namespace RedactSharp.Redactors.CreditCard
 
         public ForbrugsforeningenRedactor()
         {
-            UseValidator<LuhnValidator>();
-            UseMatchProcessor<CreditCardMatchProcessor>();
-            UseSanitizer<CreditCardSanitizer>();
-            UseExpressionMatcher<RegularExpressionMatcher>(@"600722\d{10}$");
-            UseFriendlyName("ForbrugsForeningen");
+            this.UseValidator<LuhnValidator>();
+            this.UseMatchProcessor<CreditCardMatchProcessor>();
+            this.UseSanitizer<CreditCardSanitizer>();
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"600722\d{10}$");
+            this.UseFriendlyName("ForbrugsForeningen");
         }
 
         public AbstractRedactor Configure(IRedactorOptions options)

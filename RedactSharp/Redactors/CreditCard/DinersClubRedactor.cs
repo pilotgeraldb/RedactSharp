@@ -9,11 +9,11 @@ namespace RedactSharp.Redactors.CreditCard
 
         public DinersClubRedactor()
         {
-            UseValidator<LuhnValidator>();
-            UseMatchProcessor<CreditCardMatchProcessor>();
-            UseSanitizer<CreditCardSanitizer>();
-            UseExpressionMatcher<RegularExpressionMatcher>(@"3(0[0-5]|[68]\d)\d{11}");
-            UseFriendlyName("DinersClub");
+            this.UseValidator<LuhnValidator>();
+            this.UseMatchProcessor<CreditCardMatchProcessor>();
+            this.UseSanitizer<CreditCardSanitizer>();
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"3(0[0-5]|[68]\d)\d{11}");
+            this.UseFriendlyName("DinersClub");
         }
 
         public AbstractRedactor Configure(IRedactorOptions options)

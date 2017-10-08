@@ -9,11 +9,11 @@ namespace RedactSharp.Redactors.CreditCard
 
         public VisaRedactor()
         {
-            UseValidator<LuhnValidator>();
-            UseMatchProcessor<CreditCardMatchProcessor>();
-            UseSanitizer<CreditCardSanitizer>();
-            UseExpressionMatcher<RegularExpressionMatcher>(@"(?:4[0-9]{12}(?:[0-9]{3})?)");
-            UseFriendlyName("Visa");
+            this.UseValidator<LuhnValidator>();
+            this.UseMatchProcessor<CreditCardMatchProcessor>();
+            this.UseSanitizer<CreditCardSanitizer>();
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"(?:4[0-9]{12}(?:[0-9]{3})?)");
+            this.UseFriendlyName("Visa");
         }
 
         public AbstractRedactor Configure(IRedactorOptions options)

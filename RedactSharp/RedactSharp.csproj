@@ -69,12 +69,11 @@
     <Compile Include="Redactors\IMatchProcessor.cs" />
     <Compile Include="Redactors\IRedactor.cs" />
     <Compile Include="Redactors\IRedactorCollection.cs" />
+    <Compile Include="Redactors\IRedactorExtensions.cs" />
     <Compile Include="Redactors\IRedactorMatch.cs" />
     <Compile Include="Redactors\IRedactorOptions.cs" />
     <Compile Include="Redactors\IRedactorResult.cs" />
-    <Compile Include="Redactors\MatcherFactory.cs" />
     <Compile Include="Redactors\MatchProcessor.cs" />
-    <Compile Include="Redactors\MatchProcessorFactory.cs" />
     <Compile Include="Redactors\RedactorCollection.cs" />
     <Compile Include="Redactors\RedactorLogItem.cs" />
     <Compile Include="Redactors\RedactorMatch.cs" />
@@ -93,7 +92,6 @@
     <Compile Include="Sanitizers\SanitizerOptions.cs" />
     <Compile Include="Validators\IValidator.cs" />
     <Compile Include="Validators\LuhnValidator.cs" />
-    <Compile Include="Validators\ValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

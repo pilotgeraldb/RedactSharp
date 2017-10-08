@@ -8,11 +8,11 @@ namespace RedactSharp.Redactors.CreditCard
 
         public SwitchRedactor()
         {
-            UseValidator<LuhnValidator>();
-            UseMatchProcessor<CreditCardMatchProcessor>();
-            UseSanitizer<CreditCardSanitizer>();
-            UseExpressionMatcher<RegularExpressionMatcher>(@"6759\d{12}(\d{2,3})?");
-            UseFriendlyName("Switch");
+            this.UseValidator<LuhnValidator>();
+            this.UseMatchProcessor<CreditCardMatchProcessor>();
+            this.UseSanitizer<CreditCardSanitizer>();
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"6759\d{12}(\d{2,3})?");
+            this.UseFriendlyName("Switch");
         }
 
         public AbstractRedactor Configure(IRedactorOptions options)

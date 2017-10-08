@@ -8,11 +8,11 @@ namespace RedactSharp.Redactors.CreditCard
 
         public DiscoverRedactor()
         {
-            UseValidator<LuhnValidator>();
-            UseMatchProcessor<CreditCardMatchProcessor>();
-            UseSanitizer<CreditCardSanitizer>();
-            UseExpressionMatcher<RegularExpressionMatcher>(@"((6011|65\d{2}|64[4-9]\d)\d{12}|(62\d{14}))");
-            UseFriendlyName("Discover");
+            this.UseValidator<LuhnValidator>();
+            this.UseMatchProcessor<CreditCardMatchProcessor>();
+            this.UseSanitizer<CreditCardSanitizer>();
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"((6011|65\d{2}|64[4-9]\d)\d{12}|(62\d{14}))");
+            this.UseFriendlyName("Discover");
         }
 
         public AbstractRedactor Configure(IRedactorOptions options)

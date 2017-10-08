@@ -59,9 +59,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractRedactorTests.cs" />
     <Compile Include="LuhnValidatorTests.cs" />
     <Compile Include="MatchProcessorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RedactorCollectionTests.cs" />
     <Compile Include="RegularExpressionMatcherTests.cs" />
     <Compile Include="SocialSecurityRedactorTests.cs" />
     <Compile Include="TelephoneRedactorTests.cs" />

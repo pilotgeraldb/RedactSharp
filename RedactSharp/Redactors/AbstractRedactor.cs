@@ -6,23 +6,48 @@ using RedactSharp.Validators;
 
 namespace RedactSharp.Redactors
 {
-    public abstract class AbstractRedactor : IRedactor
+    internal interface RedactorProcess : IRedactor
+    {
+        IValidator Validator { get; set; }
+        Type ValidatorType { get; set; }
+
+        IMatchProcessor MatchProcessor { get; set; }
+        Type MatchProcessorType { get; set; }
+
+        IMatcher Matcher { get; set; }
+        Type MatcherType { get; set; }
+
+        Type SanitizerType { get; set; }
+        ISanitizerOptions SanitizerOptions { get; set; }
+    }
+
+    internal interface RedactorProcessEvents : IRedactor
+    {
+        Func<string, string> BeforeProcess { get; set; }
+        Func<string, string> AfterProcess { get; set; }
+        Func<string, IRedactorMatch, IRedactorMatch> BeforeProcessMatch { get; set; }
+        Func<string, IRedactorMatch, string> AfterProcessMatch { get; set; }
+    }
+
+    public abstract class AbstractRedactor : IRedactor, RedactorProcess, RedactorProcessEvents
     {
         public string FriendlyName { get; set; }
+
         public IValidator Validator { get; set; }
         public IMatchProcessor MatchProcessor { get; set; }
         public IMatcher Matcher { get; set; }
 
-        private Type ValidatorType { get; set; }
-        private Type MatcherType { get; set; }
-        private Type MatchProcessorType { get; set; }
-        private Type SanitizerType { get; set; } 
-        private ISanitizerOptions SanitizerOptions { get; set; }
+        public Type ValidatorType { get; set; }
+        public Type MatcherType { get; set; }
+        public Type MatchProcessorType { get; set; }
 
-        private Func<string, string> BeforeProcessFunc { get; set; }
-        private Func<string, string> AfterProcessFunc { get; set; }
-        private Func<string, IRedactorMatch, IRedactorMatch> BeforeProcessMatchFunc { get; set; }
-        private Func<string, IRedactorMatch, string> AfterProcessMatchFunc { get; set; }
+        public Type SanitizerType { get; set; } 
+        public ISanitizerOptions SanitizerOptions { get; set; }
+
+        public Func<string, string> BeforeProcess { get; set; }
+        public Func<string, string> AfterProcess { get; set; }
+        public Func<string, IRedactorMatch, IRedactorMatch> BeforeProcessMatch { get; set; }
+        public Func<string, IRedactorMatch, string> AfterProcessMatch { get; set; }
 
         public AbstractRedactor()
         {
@@ -40,7 +65,7 @@ namespace RedactSharp.Redactors
                 return redactorResult;
             }
 
-            input = BeforeProcessFunc?.Invoke(input) ?? input;
+            input = BeforeProcess?.Invoke(input) ?? input;
 
             ISanitizer sanitizer = CreateSanitizer(input);
 
@@ -52,7 +77,7 @@ namespace RedactSharp.Redactors
             {
                 foreach (IRedactorMatch m in mc)
                 {
-                    IRedactorMatch match = BeforeProcessMatchFunc?.Invoke(input, m) ?? m;
+                    IRedactorMatch match = BeforeProcessMatch?.Invoke(input, m) ?? m;
 
                     if (Validator?.Validate(match.Value) ?? true)
                     {
@@ -67,13 +92,13 @@ namespace RedactSharp.Redactors
                         });
                     }
 
-                    input = AfterProcessMatchFunc?.Invoke(input, match) ?? input;
+                    input = AfterProcessMatch?.Invoke(input, match) ?? input;
                 }
             }
 
             input = sanitizer?.Update(input)?.Desanitize() ?? input;
 
-            input = AfterProcessFunc?.Invoke(input) ?? input;
+            input = AfterProcess?.Invoke(input) ?? input;
 
             redactorResult.Result = input;
 
@@ -101,109 +126,5 @@ namespace RedactSharp.Redactors
 
             return sanitizer;
         }
-
-        public IRedactor BeforeProcess(Func<string, string> function)
-        {
-            BeforeProcessFunc = function;
-
-            return this;
-        }
-
-        public IRedactor AfterProcess(Func<string, string> function)
-        {
-            AfterProcessFunc = function;
-
-            return this;
-        }
-
-        public IRedactor BeforeProcessMatch(Func<string, IRedactorMatch, IRedactorMatch> function)
-        {
-            BeforeProcessMatchFunc = function;
-
-            return this;
-        }
-
-        public IRedactor UseValidator<T>() where T : IValidator
-        {
-            Validator = ValidatorFactory.GetValidator<T>();
-            ValidatorType = typeof(T);
-
-            return this;
-        }
-
-        public IRedactor UseMatchProcessor<T>() where T : IMatchProcessor
-        {
-            MatchProcessorType = typeof(T);
-            MatchProcessor = MatchProcessorFactory.GetMatchProcessor<T>();
-
-            return this;
-        }
-
-        public IRedactor UseMatchProcessor<T>(IRedactorOptions options) where T : IMatchProcessor
-        {
-            MatchProcessorType = typeof(T);
-            MatchProcessor = MatchProcessorFactory.GetMatchProcessor<T>();
-            MatchProcessor.Configure(options);
-
-            return this;
-        }
-
-        public IRedactor UseMatcher<T>() where T : IMatcher
-        {
-            Matcher = MatcherFactory.GetMatcher<T>();
-            MatcherType = typeof(T);
-
-            return this;
-        }
-
-        public IRedactor UseMatcher<T>(IRedactorOptions options) where T : IMatcher
-        {
-            Matcher = MatcherFactory.GetMatcher<T>();
-            Matcher.Configure(options);
-            MatcherType = typeof(T);
-
-            return this;
-        }
-
-        public IRedactor UseExpressionMatcher<T>(string expression) where T : IExpressionMatcher
-        {
-            Matcher = MatcherFactory.GetMatcher<T>();
-            MatcherType = typeof(T);
-            (Matcher as IExpressionMatcher).Expression = expression;
-
-            return this;
-        }
-
-        public IRedactor UseExpressionMatcher<T>(string expression, IRedactorOptions options) where T : IExpressionMatcher
-        {
-            Matcher = MatcherFactory.GetMatcher<T>();
-            MatcherType = typeof(T);
-            (Matcher as IExpressionMatcher).Expression = expression;
-            Matcher.Configure(options);
-
-            return this;
-        }
-
-        public IRedactor UseSanitizer<T>() where T : ISanitizer
-        {
-            SanitizerType = typeof(T);
-
-            return this;
-        }
-
-        public IRedactor UseSanitizer<T>(ISanitizerOptions options) where T : ISanitizer
-        {
-            SanitizerType = typeof(T);
-            SanitizerOptions = options;
-
-            return this;
-        }
-
-        public IRedactor UseFriendlyName(string friendlyName)
-        {
-            FriendlyName = friendlyName;
-
-            return this;
-        }        
     }
 }

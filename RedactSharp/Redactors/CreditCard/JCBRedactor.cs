@@ -8,11 +8,11 @@ namespace RedactSharp.Redactors.CreditCard
 
         public JCBRedactor()
         {
-            UseValidator<LuhnValidator>();
-            UseMatchProcessor<CreditCardMatchProcessor>();
-            UseSanitizer<CreditCardSanitizer>();
-            UseExpressionMatcher<RegularExpressionMatcher>(@"35(28|29|[3-8]\d)\d{12}");
-            UseFriendlyName("JCB");
+            this.UseValidator<LuhnValidator>();
+            this.UseMatchProcessor<CreditCardMatchProcessor>();
+            this.UseSanitizer<CreditCardSanitizer>();
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"35(28|29|[3-8]\d)\d{12}");
+            this.UseFriendlyName("JCB");
         }
 
         public AbstractRedactor Configure(IRedactorOptions options)

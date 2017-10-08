@@ -9,11 +9,11 @@ namespace RedactSharp.Redactors.CreditCard
 
         public AmericanExpressRedactor()
         {
-            UseValidator<LuhnValidator>();
-            UseMatchProcessor<CreditCardMatchProcessor>();
-            UseSanitizer<CreditCardSanitizer>(new Sanitizers.SanitizerOptions());
-            UseExpressionMatcher<RegularExpressionMatcher>(@"3[47]\d{13}");
-            UseFriendlyName("AmericanExpress");
+            this.UseValidator<LuhnValidator>();
+            this.UseMatchProcessor<CreditCardMatchProcessor>();
+            this.UseSanitizer<CreditCardSanitizer>(new Sanitizers.SanitizerOptions());
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"3[47]\d{13}");
+            this.UseFriendlyName("AmericanExpress");
         }
 
         public AbstractRedactor Configure(IRedactorOptions options)

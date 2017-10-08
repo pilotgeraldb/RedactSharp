@@ -9,11 +9,11 @@ namespace RedactSharp.Redactors.CreditCard
 
         public DankortRedactor()
         {
-            UseValidator<LuhnValidator>();
-            UseMatchProcessor<CreditCardMatchProcessor>();
-            UseSanitizer<CreditCardSanitizer>();
-            UseExpressionMatcher<RegularExpressionMatcher>(@"5019\d{12}");
-            UseFriendlyName("Dankort");
+            this.UseValidator<LuhnValidator>();
+            this.UseMatchProcessor<CreditCardMatchProcessor>();
+            this.UseSanitizer<CreditCardSanitizer>();
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"5019\d{12}");
+            this.UseFriendlyName("Dankort");
         }
 
         public AbstractRedactor Configure(IRedactorOptions options)

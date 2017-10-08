@@ -11,14 +11,14 @@ namespace RedactSharp.Redactors.SocialSecurity
     {
         public SocialSecurityRedactor()
         {
-            UseValidator<SocialSecurityNumberValidator>();
+            this.UseValidator<SocialSecurityNumberValidator>();
             //UseExpressionMatcher<RegularExpressionMatcher>(@"(\s{1,})(\d{3}-?\d{2}-?\d{4})(\s{1,})");
-            UseExpressionMatcher<RegularExpressionMatcher>(@"(\d{3}-?\d{2}-?\d{4})");
-            UseSanitizer<SocialSecuritySanitizer>(new SanitizerOptions()
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"(\d{3}-?\d{2}-?\d{4})");
+            this.UseSanitizer<SocialSecuritySanitizer>(new SanitizerOptions()
             {
                 InvalidCharacters = new char[] { '-', ' ' }
             });
-            UseFriendlyName("SocialSecurity");
+            this.UseFriendlyName("SocialSecurity");
         }
     }
 }

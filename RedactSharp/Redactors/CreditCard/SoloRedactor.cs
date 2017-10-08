@@ -8,11 +8,11 @@ namespace RedactSharp.Redactors.CreditCard
 
         public SoloRedactor()
         {
-            UseValidator<LuhnValidator>();
-            UseMatchProcessor<CreditCardMatchProcessor>();
-            UseSanitizer<CreditCardSanitizer>();
-            UseExpressionMatcher<RegularExpressionMatcher>(@"6767\d{12}(\d{2,3})?");
-            UseFriendlyName("Solo");
+            this.UseValidator<LuhnValidator>();
+            this.UseMatchProcessor<CreditCardMatchProcessor>();
+            this.UseSanitizer<CreditCardSanitizer>();
+            this.UseExpressionMatcher<RegularExpressionMatcher>(@"6767\d{12}(\d{2,3})?");
+            this.UseFriendlyName("Solo");
         }
 
         public AbstractRedactor Configure(IRedactorOptions options)
